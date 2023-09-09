@@ -1,17 +1,26 @@
-// Извлекаем данные из HTML-формы в модальном окне.
-export const getFormData = (form) => {
 
+// Извлекаем данные из HTML-формы в модальном окне "Собери сам".
+export const getFormData = (form) => {
   // Создаём объект FormData для работы с данными формы.
   const formData = new FormData(form);
+  const data = {};
 
-  // Проходим по всем элементам в formData. Каждый элемент представляет пару ключ-значение.
-  for (const [name, value] of formData.entries()) {
+  // Создаём объект FormData для работы с данными формы.
 
-    // Если свойство data[name] существует, добавляем текущее значение к массиву с этим именем.
-    // Если не существует, создаём его и присваиваем текущее значение.
-    data[name] ? data[name].push(value) : data[name] = value;
+  // Проходим по всем элементам в formData. Каждый элемент это пара ключ-значение
+  for (const [name, value] of formData.entries()) { 
+    //Проверяем существует ли name в объекте data
+    if (data[name]) { 
+      //Проверяем массив это 
+      if (!Array.isArray(data[name])) { 
+        //Если не массив, то делает его массивом
+        data[name] = [data[name]]; 
+      }
+      data[name].push(value); 
+    } else {
+      //Если name не существует, то создаем свойство с именем name в объекте data
+      data[name] = value;
+    }
   }
-
-  // Возвращаем объект с извлечёнными данными.
   return data;
 };
