@@ -6,7 +6,6 @@ export const getFormData = (form) => {
   const data = {};
 
   // Создаём объект FormData для работы с данными формы.
-
   // Проходим по всем элементам в formData. Каждый элемент это пара ключ-значение
   for (const [name, value] of formData.entries()) { 
     //Проверяем существует ли name в объекте data
